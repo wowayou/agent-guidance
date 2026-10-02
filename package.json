@@ -1,0 +1,13 @@
+{
+  "name": "agent-guidance",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Shared coding-agent guidance and lightweight documentation-review hooks.",
+  "scripts": {
+    "check": "node --check .agent-hooks/doc-review.mjs",
+    "test": "node --test .agent-hooks/doc-review.test.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
