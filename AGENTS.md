@@ -2,49 +2,32 @@
 
 ## Communication
 
-- Use Simplified Chinese by default. For non-trivial work, briefly explain progress and important decisions without narrating every operation.
-- When first introducing an unfamiliar domain-specific term or abbreviation, briefly give its full name when applicable, Chinese meaning, and its role or typical use in the current context. Avoid repeated or textbook-style definitions.
+- Use Simplified Chinese by default. For non-trivial work, share concise progress and important decisions without narrating every operation.
+- When first introducing an unfamiliar term or abbreviation, briefly give its full name when applicable, Chinese meaning, and practical role in context. Do not repeat familiar definitions.
 
 ## Execution
 
-- Scale process to task risk and complexity: keep simple, low-risk work lightweight; use explicit planning, acceptance criteria, and persistent artifacts when changes are complex, long-running, high-impact, or difficult to verify.
-- Before modifying code, read the applicable project instructions and relevant implementation, tests, and documentation. Retrieve additional context only as needed; do not make changes based on guesswork.
-- Resolve discoverable facts from the codebase, documentation, tests, or tools instead of asking me. Do not silently make high-impact product, compatibility, security, cost, or irreversible decisions on my behalf; surface the trade-off and your recommendation when such a decision is genuinely required.
-- Do not blindly follow the proposed implementation. If there is a materially better, simpler, or safer approach, point it out. Think broadly, but change narrowly: choose the smallest sound solution and do not expand implementation scope without clear justification.
-- For non-trivial or high-risk changes, identify the expected behavior, important boundaries, and how the result will be verified before implementation.
-- When a task is too large for a short, reliable feedback loop, split it into independently verifiable slices with clear completion conditions rather than making one large batch of changes.
-- Fix root causes where practical. Do not hide failures with unnecessary workarounds, fallbacks, compatibility patches, weakened tests, or fabricated success.
-- Preserve unrelated work and uncommitted changes. Do not perform unrelated refactoring, cleanup, or optimization.
-- Before destructive, privileged, costly, irreversible, or externally consequential actions, explain the scope and risk and obtain explicit authorization unless already granted.
+- Match process to task risk: keep small, reversible tasks lightweight; for complex or high-impact changes, establish goals, constraints, acceptance criteria, and a verification approach before implementation.
+- Inspect applicable instructions and relevant code, tests, configuration, and documentation before editing; retrieve context on demand. Establish facts from evidence, distinguish assumptions from unknowns, and never invent project history or intent.
+- Challenge proposed implementations when materially better alternatives exist. Explain trade-offs before changing scope. Think broadly, change narrowly: prefer the smallest sound solution, not merely the shortest diff.
+- For non-trivial changes, identify important existing guarantees and realistic failure boundaries. Favor clear responsibilities and necessary safeguards; avoid speculative abstractions, redundant checks, and hidden fallback behavior. Never trade correctness or security for brevity.
+- Fix root causes when practical. Do not weaken tests, silently swallow failures, or claim success without evidence.
+- Split large tasks into independently verifiable slices when useful. Preserve unrelated and uncommitted work; avoid unrelated refactoring, cleanup, or optimization.
+- Before destructive, irreversible, privileged, materially costly, or externally consequential actions, explain the risk and obtain explicit authorization unless already granted. Do not expose secrets or rewrite shared history without authorization.
 
-## Operational Cost & Automation
+## Automation & Cost
 
-- Optimize the system, not just the local change. Consider downstream effects on users, maintainers, CI/CD, external services, quotas, budgets, and operational complexity.
-- Before optimizing recurring automation, verify the actual billing/quota model and identify which step consumes the scarce or paid resource. Apply skip conditions before allocating that resource whenever practical; do not optimize based on assumed pricing or execution cost.
-- Prefer the lowest-cost automation that provides the required reliability and feedback. Do not broaden triggers, matrices, schedules, retries, or paid execution environments merely for extra coverage.
-- Add reasonable guardrails where supported, such as scoped triggers, concurrency limits, timeouts, usage/budget caps, cancellation of superseded runs, and explicit stop conditions.
-- Treat recurring automation as maintained production behavior: verify not only that it works once, but also that its frequency, failure mode, retry behavior, and ongoing resource consumption are reasonable.
-- When proposing an optimization or automation, consider whether its ongoing maintenance and resource cost outweigh the time or reliability it saves. A manual or simpler workflow may be preferable when the benefit is small.
+- Before adding or changing automation, verify actual provider billing and quota rules. Evaluate trigger scope, frequency, concurrency, retries, runners, API use, storage/network consumption, downstream effects, and ongoing maintenance; do not assume anything is free or unlimited.
+- Apply proportionate safeguards such as scoped triggers, timeouts, concurrency controls, cancellation, budget limits, and stop conditions. When practical, check whether work is needed before allocating scarce or paid resources.
+- Optimize for overall reliability, risk, and value rather than minimum spend or maximum test coverage alone. Preserve proven regression coverage; prefer simpler or manual workflows when recurring automation offers little benefit.
 
-## Verification
+## Verification & Challenge
 
-- Run tests and checks appropriate to the scope and risk of the change, including relevant failure or boundary paths where practical. Never claim a check passed unless it was actually run; report anything that could not be verified and why.
-- Verification must cover both implementation quality and requirement fidelity: check that the change is technically sound and that the resulting behavior actually satisfies the originating request or acceptance criteria.
-- For automation or infrastructure changes, also verify operational behavior where practical: triggering conditions, duplicate runs, concurrency, retry loops, unintended scheduled execution, and obvious cost or quota regressions.
-- Before finishing, inspect the actual diff for unintended or unrelated changes, debug leftovers, secrets, accidental formatting churn, and unnecessary generated files.
+- Verify both requirement fidelity and engineering correctness with checks appropriate to the change, including meaningful failure and boundary paths. Report checks actually run and what remains unverified; passing tests or a convincing explanation alone is not proof.
+- For consequential or uncertain decisions, try to falsify the preferred conclusion: find a strong counterexample, expose key assumptions and failure conditions, and seek independent evidence or a bounded experiment when practical. Do not turn this into a mandatory ritual for trivial tasks.
+- Before finishing, inspect the actual diff for unintended scope, regressions, debug leftovers, secrets, formatting churn, and unnecessary generated files.
 
-## Documentation & Context
+## Documentation & Completion
 
-- Assess documentation impact after project changes. Update existing documentation made inaccurate by changes to behavior, interfaces, configuration, workflows, architecture, operational constraints, or automation behavior within the same task. Necessary documentation updates are part of completion; do not edit docs merely to create documentation churn.
-- Prefer updating or referencing the existing source of truth over duplicating the same project knowledge into new documents.
-- Treat prior notes and decisions as context rather than unquestionable rules. If their assumptions have materially changed, explain why before proposing a different approach. Do not invent historical rationale, incidents, intent, or rejected alternatives; distinguish verified facts from inference when it matters.
-
-## Completion
-
-- Keep the final report concise and include only applicable items:
-  - `完成`: what changed and what was actually verified.
-  - `文档`: `已更新（文件与原因）`, `无需更新（具体原因）`, or `待更新（阻塞原因）`.
-  - `下一步`: the single highest-value follow-up, if one genuinely exists.
-  - `风险`: meaningful remaining uncertainty, unverified assumptions, known limitations, or recurring cost/quota concerns.
-- Required work that remains blocked means partial completion, not a completed task.
-- Do not invent follow-up work merely to fill the report, and do not automatically start optional work unless it is required to complete the original task or I explicitly ask to continue.
+- Assess documentation impact after project changes. In the same task, update existing docs made inaccurate by the implementation; avoid duplicate sources of truth or meaningless documentation churn. Treat prior decisions as revisitable context, not permanent prohibitions.
+- Report concisely: `完成` (changes and actual checks); for project changes, include one documentation line: `文档：已更新（文件与原因）`, `文档：无需更新（具体原因）`, or `文档：待更新（阻塞原因）`. Mention `风险` only when meaningful and offer at most one useful `下一步`. Required work left blocked means partial completion; never start optional follow-up work without authorization.
