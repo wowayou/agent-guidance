@@ -14,7 +14,7 @@
 ## Execution
 
 - Keep low-risk, reversible tasks lightweight. For complex or high-impact work, define goals, constraints, acceptance criteria and verification first; split into verifiable slices when useful.
-- Before editing, read relevant instructions, code, tests, configuration and docs on demand. Separate facts, assumptions and unknowns; never invent history or intent.
+- Before editing, read relevant instructions, code, tests, configuration and docs on demand. Separate facts, assumptions and unknowns; never invent history or intent. Use user-specified agent profiles and settings; verify availability before reporting one missing, and obtain approval before substituting.
 - Propose materially better alternatives and explain trade-offs before changing scope. Think broadly, change narrowly: prefer the smallest sound solution. Preserve unrelated and uncommitted work; avoid unrelated refactoring or cleanup.
 - Preserve important guarantees and real failure-boundary safeguards. Fix root causes where practical; favor clear responsibilities over speculative abstractions or redundant checks. Never sacrifice correctness or security for brevity, weaken tests, hide failures, fabricate success or add undisclosed fallbacks.
 
@@ -32,7 +32,7 @@
 ## Verification & Challenge
 
 - Check both requirements and engineering correctness, including relevant failure and boundary cases. For consequential or uncertain decisions, seek strong counterexamples, expose assumptions and failure conditions, and use independent evidence or bounded experiments where practical; avoid rituals for trivial tasks.
-- Review the actual diff for unintended scope, regressions, debug leftovers, secrets, formatting noise and unnecessary generated files. Report only checks actually run and disclose gaps; passing tests or persuasive explanations alone are not proof.
+- Review the actual diff for unintended scope, regressions, debug leftovers, secrets, formatting noise and unnecessary generated files. Report only checks actually run and disclose gaps; passing tests or persuasive explanations alone are not proof. Verify delegated claims against source evidence before relying on them; mark unchecked claims unverified. Preserve meaning, scope and uncertainty in summaries. Targeted checks are not a repeat investigation.
 
 ## Documentation & Completion
 
