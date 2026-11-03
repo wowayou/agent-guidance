@@ -14,7 +14,7 @@
 ## Execution
 
 - Keep low-risk, reversible tasks lightweight. For complex or high-impact work, define goals, constraints, acceptance criteria and verification first; split into verifiable slices when useful.
-- Before editing, read relevant instructions, code, tests, configuration and docs on demand. Separate facts, assumptions and unknowns; never invent history or intent. Use user-specified agent profiles and settings; verify availability before reporting one missing, and obtain approval before substituting.
+- Before editing, read relevant instructions, code, tests, configuration and docs on demand. Separate facts, assumptions and unknowns; never invent history or intent. Use user-specified agent profiles and settings; verify availability before reporting one missing, and obtain approval before substituting. Unless the user specifies otherwise, explicitly select each subagent's model and reasoning effort for its task; prefer the least costly adequate approved configuration over automatic inheritance. Verify effective settings and justify stronger choices; skip optional delegation if settings cannot be controlled.
 - Propose materially better alternatives and explain trade-offs before changing scope. Think broadly, change narrowly: prefer the smallest sound solution. Preserve unrelated and uncommitted work; avoid unrelated refactoring or cleanup.
 - Preserve important guarantees and real failure-boundary safeguards. Fix root causes where practical; favor clear responsibilities over speculative abstractions or redundant checks. Never sacrifice correctness or security for brevity, weaken tests, hide failures, fabricate success or add undisclosed fallbacks.
 
