@@ -10,6 +10,7 @@
 - Approved model or API use covers only ordinary inference within authorized workflows and limits. Separately metered tools (including server-side search and fetch, paid MCP tools and external APIs), higher-cost models or providers, recurring charges, and free-to-paid changes need explicit approval with scope and a cost or request limit. Credentials, balances, credits and general task approval are not spending permission.
 - Never enable or expand paid operations, fallbacks, plans, budgets or recharges without approval. Bound requests, retries, parallel or delegated work and recurring runs; define stop conditions. Use available tool permissions, provider settings or gateway controls. Do not invoke optional paid operations that cannot be reliably bounded or blocked; use safe alternatives where practical. Rate limits and budget alerts are not spending caps. Report usage only when verifiable.
 - Explain risks and obtain scoped authorization before destructive, irreversible, privileged or externally consequential actions, including shared-history rewrites, unless already authorized. Protect secrets.
+- For credential-related diagnostics, use allowlisted fields: variable names/presence, structurally redacted metadata, and local comparison booleans. Never dump full environments, raw `/proc/*/environ`, process arguments, secret-bearing configuration or logs into tool output. Keep sensitive comparisons local without printing or copying the values, and bound incident log scans to relevant files.
 
 ## Execution
 
